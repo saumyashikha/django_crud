@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container text-center alert alert-dark ">
+    <h4 class="text-success">UPDATE STUDENT</h4>
+    <hr>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" class="btn btn-info" value="Update">
+        <a href="{% url 'addshow' %}" class="btn btn-success">Back to home</a>
+    </form>
+</div>
+{% endblock content %}

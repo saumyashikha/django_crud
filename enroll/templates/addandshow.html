@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row mt-5 text-center ml-5 pl-5">
+    <div class="col-sm-4 alert-dark">
+<h3 class="text-success mt-4">ADD NEW STUDENT</h3>
+<hr>
+<form action="" method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" class="btn btn-success" value="Add">
+</form>
+</div>
+   <div class="col-sm-7 alert-dark ml-4">
+       <h2 class="text-success mt-4">SHOW DATA</h2>
+       <hr>
+       {% if stu %}
+        <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>NAME</th>
+            <th>EMAIL</th>
+            <th>PASSWORD</th>
+            <th>ACTIONS</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for st in stu %}  
+          <tr>
+            <td>{{st.id}}</td>
+            <td>{{st.name}}</td>
+            <td>{{st.email}}</td>
+            <td>{{st.password}}</td>
+            <td>
+                <a href="{% url 'updatedata' st.id %}" class="btn btn-warning btn-sm">Edit</a>
+                <form action="{% url 'deletedata' st.id %}" method="post" class="d-inline">
+                  {% csrf_token %}
+                  <input type="submit" class="btn btn-danger btn-sm" value="Delete">
+                </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+       
+       {% else %}
+       <h2>No record found</h2>
+       {% endif %}
+   </div>
+</div>
+{% endblock content %}
